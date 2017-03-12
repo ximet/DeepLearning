@@ -24,6 +24,7 @@
   "homepage": "https://github.com/ximet/NeuralNetworks#readme",
   "dependencies": {
     "globby": "^6.1.0",
-    "image-grayscale": "^1.0.2"
+    "image-grayscale": "^1.0.2",
+    "mnist": "^1.0.5"
   }
 }
