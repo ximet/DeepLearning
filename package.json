@@ -26,5 +26,8 @@
     "globby": "^6.1.0",
     "image-grayscale": "^1.0.2",
     "mnist": "^1.0.5"
+  },
+  "devDependencies": {
+    "natural-brain": "^0.2.3"
   }
 }
