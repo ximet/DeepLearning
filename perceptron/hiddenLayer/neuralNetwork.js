@@ -1,4 +1,4 @@
-const { mean } = require('../../math.js');
+const { mean, callFunctionSomeTimes } = require('../../math.js');
 const { activationSigmoid, derivativeSigmoid} = require('./functionActivation.js');
 
 /*
@@ -18,7 +18,7 @@ const { activationSigmoid, derivativeSigmoid} = require('./functionActivation.js
 
 
 class Perceptron {
-    constructor(data) {
+    constructor(data, countIterateLearning) {
         this.data = data;
         this.weights = {
             input1_hidden1: Math.random(),
@@ -30,7 +30,8 @@ class Perceptron {
             hidden1_output: Math.random(),
             hidden2_output: Math.random(),
             bias_output: Math.random(),
-        }
+        };
+        this.countIterateLearning = countIterateLearning || 100000;
     }
 
     neuralNetworkDescription (input1, input2) {
@@ -118,6 +119,15 @@ class Perceptron {
     trainedNeuralNetwork (weight_deltas = this.train()) {
         Object.keys(this.weights).forEach(key =>
             this.weights[key] += weight_deltas[key]);
+    }
+
+    trainNetwork () {
+        callFunctionSomeTimes(() => this.trainedNeuralNetwork(), this.countIterateLearning);
+    }
+
+    run () {
+        this.outputResults();
+        this.calculateResults();
     }
 
 

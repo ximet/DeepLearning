@@ -1,4 +1,3 @@
-const { callFunctionSomeTimes } = require('./math.js');
 const Perceptron = require('./perceptron/hiddenLayer/neuralNetwork.js');
 
 const data = [
@@ -9,6 +8,5 @@ const data = [
 ];
 
 const simplePerceptron = new Perceptron(data);
-callFunctionSomeTimes(() => simplePerceptron.trainedNeuralNetwork(), 100000);
-simplePerceptron.outputResults();
-simplePerceptron.calculateResults();
+simplePerceptron.trainNetwork();
+simplePerceptron.run();
