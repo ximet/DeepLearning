@@ -55,24 +55,24 @@ class Perceptron {
     }
 
     updateWeightForHiddenLayer (weight_deltas, h1, h2, o1_delta) {
-        weight_deltas.h1_o1 += h1 * o1_delta;
-        weight_deltas.h2_o1 += h2 * o1_delta;
-        weight_deltas.bias_o1 += o1_delta;
+        weight_deltas.hidden1_output += h1 * o1_delta;
+        weight_deltas.hidden2_output += h2 * o1_delta;
+        weight_deltas.bias_output += o1_delta;
 
         return weight_deltas;
     }
 
     train () {
         let weight_deltas = {
-            i1_h1: 0,
-            i2_h1: 0,
-            bias_h1: 0,
-            i1_h2: 0,
-            i2_h2: 0,
-            bias_h2: 0,
-            h1_o1: 0,
-            h2_o1: 0,
-            bias_o1: 0,
+            input1_hidden1: 0,
+            input2_hidden1: 0,
+            bias_hidden1: 0,
+            input1_hidden2: 0,
+            input2_hidden2: 0,
+            bias_hidden2: 0,
+            hidden1_output: 0,
+            hidden2_output: 0,
+            bias_output: 0,
         };
 
         for (let {input: [input1, input2], output} of this.data) {
@@ -90,25 +90,29 @@ class Perceptron {
             const hidden1_delta = output_delta * derivativeSigmoid(hidden1_input);
             const hidden2_delta = output_delta * derivativeSigmoid(hidden2_input);
 
-            weight_deltas.i1_h1 += input1 * hidden1_delta;
-            weight_deltas.i2_h1 += input2 * hidden1_delta;
-            weight_deltas.bias_h1 += hidden1_delta;
+            weight_deltas.input1_hidden1 += input1 * hidden1_delta;
+            weight_deltas.input2_hidden1 += input2 * hidden1_delta;
+            weight_deltas.bias_hidden1 += hidden1_delta;
 
-            weight_deltas.i1_h2 += input1 * hidden2_delta;
-            weight_deltas.i2_h2 += input2 * hidden2_delta;
-            weight_deltas.bias_h2 += hidden2_delta;
+            weight_deltas.input1_hidden2 += input1 * hidden2_delta;
+            weight_deltas.input2_hidden2 += input2 * hidden2_delta;
+            weight_deltas.bias_hidden2 += hidden2_delta;
         }
 
         return weight_deltas;
     }
 
     calculateResults () {
-        mean(this.data.map(({input: [i1, i2], output: y}) => Math.pow(y - this.neuralNetworkDescription(i1, i2), 2)));
+        mean(this.data.map(({input: [i1, i2], output: y}) => {
+            const output = this.neuralNetworkDescription(i1, i2).outputNN;
+
+            return Math.pow(y - output, 2)
+        }));
     }
 
     outputResults () {
         this.data.forEach(({input: [i1, i2], output: y}) =>
-            console.log(`${i1} XOR ${i2} => ${this.neuralNetworkDescription(i1, i2)} (expected ${y})`));
+            console.log(`${i1} XOR ${i2} => ${this.neuralNetworkDescription(i1, i2).outputNN} (expected ${y})`));
     }
 
     trainedNeuralNetwork (weight_deltas = this.train()) {
