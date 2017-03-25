@@ -32,6 +32,15 @@ class Perceptron {
             bias_output: Math.random(),
         };
         this.countIterateLearning = countIterateLearning || 100000;
+        this._networkTask = null;
+    }
+
+    get networkTask() {
+        return this._networkTask;
+    }
+
+    set networkTask(networkTask) {
+        this._networkTask = networkTask;
     }
 
     neuralNetworkDescription (input1, input2) {
