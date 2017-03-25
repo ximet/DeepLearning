@@ -120,9 +120,9 @@ class Perceptron {
         }));
     }
 
-    outputResults () {
+    outputResults (networkTask) {
         this.data.forEach(({input: [i1, i2], output: y}) =>
-            console.log(`${i1} XOR ${i2} => ${this.neuralNetworkDescription(i1, i2).outputNN} (expected ${y})`));
+            console.log(`${i1} ${networkTask} ${i2} => ${this.neuralNetworkDescription(i1, i2).outputNN} (expected ${y})`));
     }
 
     trainedNeuralNetwork (weight_deltas = this.train()) {
@@ -131,12 +131,17 @@ class Perceptron {
     }
 
     trainNetwork () {
-        callFunctionSomeTimes(() => this.trainedNeuralNetwork(), this.countIterateLearning);
+        if (this.networkTask() !== null) {
+            callFunctionSomeTimes(() => this.trainedNeuralNetwork(), this.countIterateLearning);
+        }
     }
 
     run () {
-        this.outputResults();
-        this.calculateResults();
+        const networkTask = this.networkTask();
+        if (networkTask !== null) {
+            this.outputResults(networkTask);
+            this.calculateResults();
+        }
     }
 
 

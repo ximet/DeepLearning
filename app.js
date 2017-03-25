@@ -8,5 +8,6 @@ const data = [
 ];
 
 const simplePerceptron = new Perceptron(data);
+simplePerceptron.networkTask('XOR');
 simplePerceptron.trainNetwork();
 simplePerceptron.run();
