@@ -1,10 +1,10 @@
 class NaiveBayes {
     constructor (options) {
-        this.options = options ? options : this.error('option')
+        this.options = options ? options : this.getError('option');
         this.groupSize = 0;
     }
 
-    error (type) {
+    getError (type) {
         switch(type) {
             case 'option':
                 throw TypeError('Naive Bayes have invalid option');
