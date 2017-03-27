@@ -5,6 +5,20 @@ const splitSentence = (sentence) => {
     return clearedSentence.split(/\s+/);
 };
 
+const getNumberOfOccurrencesDictionary = (words) => {
+    const numberOfOccurrencesDictionary = {};
+
+    words.forEach(word => {
+        if (!numberOfOccurrencesDictionary[word]) {
+            numberOfOccurrencesDictionary[word] = 1;
+        }
+        else {
+            numberOfOccurrencesDictionary[word]++;
+        }
+    });
+    return numberOfOccurrencesDictionary;
+};
+
 module.exports = {
-    splitSentence
+    splitSentence, getNumberOfOccurrencesDictionary
 };
