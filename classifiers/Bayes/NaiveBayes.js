@@ -5,7 +5,8 @@ class NaiveBayes {
         this.options = options ? options : this.getError('option');
         this.groupSize = 0;
         this.listCategory = [];
-
+        this.vocabulary = [];
+        this.vocabularySize = 0;
         this.totalDocument = 0;
     }
 
@@ -25,9 +26,23 @@ class NaiveBayes {
 
     learn (sentence, category) {
         this.totalDocument++;
+        this.initializeCategory(category);
 
         const words = splitSentence(sentence);
-        getNumberOfOccurrencesDictionary(words);
+        const occurencyDictionary = getNumberOfOccurrencesDictionary(words);
+
+        Object.keys(occurencyDictionary).forEach(item => {
+
+            if (!this.vocabulary.find(word => word === item)) {
+                this.vocabulary.push(item);
+                this.vocabularySize++;
+            }
+
+        });
+
+
+
+        console.log('category:', this.listCategory)
     }
 
     additiveSmoothing (frequencyCount, itemCount) {
