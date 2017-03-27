@@ -17,4 +17,5 @@ const NaiveBayes = require('./classifiers/Bayes/NaiveBayes.js');
 
 //test classifier Naive Bayes
 
-const classifier = new NaiveBayes();
+const classifier = new NaiveBayes({});
+classifier.learn('Hello! How are you? I\'m fine. How are you?', 'Hello');
