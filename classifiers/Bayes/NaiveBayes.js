@@ -12,8 +12,6 @@ class NaiveBayes {
         this.wordInCategory = {};
     }
 
-
-
     getError (type) {
         switch(type) {
             case 'option':
@@ -52,10 +50,6 @@ class NaiveBayes {
 
             this.wordInCategory[category] += frequencyInText
         });
-
-
-
-        console.log('category:', this.listCategory)
     }
 
     additiveSmoothing (frequencyCount, itemCount) {
