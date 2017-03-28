@@ -8,6 +8,8 @@ class NaiveBayes {
         this.vocabulary = [];
         this.vocabularySize = 0;
         this.totalDocument = 0;
+        this.frequencyCountDictionary = {};
+        this.wordInCategory = {};
     }
 
 
@@ -21,6 +23,8 @@ class NaiveBayes {
     }
 
     initializeCategory (category) {
+        this.frequencyCountDictionary[category] = {};
+        this.wordInCategory[category] = 0;
         return this.listCategory.find(item => item === category) ? this.listCategory : this.listCategory.push(category);
     }
 
@@ -29,7 +33,7 @@ class NaiveBayes {
         this.initializeCategory(category);
 
         const words = splitSentence(sentence);
-        const occurencyDictionary = getNumberOfOccurrencesDictionary(words);
+        var occurencyDictionary = getNumberOfOccurrencesDictionary(words);
 
         Object.keys(occurencyDictionary).forEach(item => {
 
@@ -37,7 +41,16 @@ class NaiveBayes {
                 this.vocabulary.push(item);
                 this.vocabularySize++;
             }
+            const frequencyInText = occurencyDictionary[item];
 
+            if (!this.frequencyCountDictionary[category][item]) {
+              this.frequencyCountDictionary[category][item] = frequencyInText
+            }
+            else {
+              this.frequencyCountDictionary[category][item] += frequencyInText
+            }
+
+            this.wordInCategory[category] += frequencyInText
         });
 
 
