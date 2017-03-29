@@ -1,4 +1,5 @@
 const { splitSentence, getNumberOfOccurrencesDictionary } = require('./sentenceHelper.js');
+const { additiveSmoothing, updateFrequencyCountDictionary } = require('./math.js');
 
 class NaiveBayes {
     constructor (options) {
@@ -31,30 +32,24 @@ class NaiveBayes {
         this.initializeCategory(category);
 
         const words = splitSentence(sentence);
-        var occurencyDictionary = getNumberOfOccurrencesDictionary(words);
+        const occurrenceDictionary = getNumberOfOccurrencesDictionary(words);
 
-        Object.keys(occurencyDictionary).forEach(item => {
+        Object.keys(occurrenceDictionary).forEach(item => {
 
             if (!this.vocabulary.find(word => word === item)) {
                 this.vocabulary.push(item);
                 this.vocabularySize++;
             }
-            const frequencyInText = occurencyDictionary[item];
+            const frequencyItemInText = occurrenceDictionary[item];
 
-            if (!this.frequencyCountDictionary[category][item]) {
-              this.frequencyCountDictionary[category][item] = frequencyInText
-            }
-            else {
-              this.frequencyCountDictionary[category][item] += frequencyInText
-            }
-
-            this.wordInCategory[category] += frequencyInText
+            this.frequencyCountDictionary = updateFrequencyCountDictionary(item, frequencyItemInText, category, this.frequencyCountDictionary);
+            this.wordInCategory[category] += frequencyItemInText
         });
     }
 
-    additiveSmoothing (frequencyCount, itemCount) {
-        return ( frequencyCount + 1 ) / ( itemCount + this.groupSize )
-    }
+
+
+
 }
 
 module.exports = NaiveBayes;
