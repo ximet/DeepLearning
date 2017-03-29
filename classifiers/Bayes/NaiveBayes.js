@@ -47,6 +47,15 @@ class NaiveBayes {
         });
     }
 
+    categorize (sentence) {
+        const words = splitSentence(sentence);
+        const occurrenceDictionary = getNumberOfOccurrencesDictionary(words);
+
+        this.listCategory.forEach(category => {
+            
+        })
+    }
+
 
 
 
