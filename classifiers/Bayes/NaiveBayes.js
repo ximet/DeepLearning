@@ -31,8 +31,8 @@ class NaiveBayes {
 
     learn (sentence, category) {
         this.totalSentences++;
-        this.countSentenceInCategory[category]++;
         this.initializeCategory(category);
+        this.countSentenceInCategory[category]++;
 
         const words = splitSentence(sentence);
         const occurrenceDictionary = getNumberOfOccurrencesDictionary(words);
@@ -59,7 +59,6 @@ class NaiveBayes {
         this.listCategory.forEach(category => {
             const categoryProbability = this.countSentenceInCategory[category] / this.totalSentences;
             let logarithmCategoryProbability = Math.log(categoryProbability);
-
             Object.keys(occurrenceDictionary).forEach(item => {
                 const frequencyItemInText = occurrenceDictionary[item];
                 const wordFrequencyCount = this.frequencyCountDictionary[category][item] || 0;
@@ -68,12 +67,13 @@ class NaiveBayes {
 
                 logarithmCategoryProbability += frequencyItemInText * Math.log(itemProbability)
             });
-
             if (logarithmCategoryProbability > maxProbability) {
                 maxProbability = logarithmCategoryProbability;
                 chosenCategory = category
             }
         });
+
+        console.log('Chosen category: ', chosenCategory);
 
         return chosenCategory;
     }
