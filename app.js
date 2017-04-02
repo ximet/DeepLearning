@@ -15,7 +15,13 @@ const NaiveBayes = require('./classifiers/Bayes/NaiveBayes.js');
 // simplePerceptron.run();
 
 
-//test classifier Naive Bayes
-
 const classifier = new NaiveBayes({});
-classifier.learn('Hello! How are you? I\'m fine. How are you?', 'Hello');
+
+classifier.learn('You are see new device, which Apple', 'tech');
+classifier.learn('I like many device: samsungS6, nexus, iPhone, Pixel!!', 'tech');
+
+classifier.learn('Ohhh, it is great kitten!!', 'cat');
+classifier.learn('Kitten, tiger, leopard', 'cat');
+
+
+classifier.categorize('iPhone it is cool telephone.');
