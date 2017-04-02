@@ -22,11 +22,17 @@ class NaiveBayes {
 
     }
 
-    initializeCategory (category) {
+    initializeNewCategory (category) {
+        this.listCategory.push(category);
         this.countSentenceInCategory[category] = 0;
         this.frequencyCountDictionary[category] = {};
         this.wordInCategory[category] = 0;
-        return this.listCategory.find(item => item === category) ? this.listCategory : this.listCategory.push(category);
+    }
+
+    initializeCategory (category) {
+        return this.listCategory.find(item => item === category)
+            ? this.listCategory
+            : this.initializeNewCategory(category)
     }
 
     learn (sentence, category) {
