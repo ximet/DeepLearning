@@ -1,5 +1,5 @@
 const getEuclideanDistance = (list) => {
-    return Math.sqrt(list.reduce((x, y) => Math.pow(x - y, 2), 0))
+    return Math.sqrt(list.reduce((prev, current) => prev + Math.pow(current.x - current.y, 2), 0))
 };
 
 module.exports = {
