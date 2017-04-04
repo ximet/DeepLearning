@@ -5,6 +5,12 @@ from math import exp
 def functionActivation(x):
     return 1 / (1 + exp(-x))
 
+def simpleFunctionActivation(x):
+    if x >= 0:
+       return 1
+      else:
+       return -1
+
 #
 #                       input1
 #                                       F. activation
