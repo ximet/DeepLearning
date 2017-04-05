@@ -1,6 +1,7 @@
 from pylab import rand, plot, show, norm
 from math import exp
 
+
 def functionActivation(x):
     return 1 / (1 + exp(-x))
 
