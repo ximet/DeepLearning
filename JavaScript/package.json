@@ -28,6 +28,8 @@
     "mnist": "^1.0.5"
   },
   "devDependencies": {
+    "csvtojson": "^1.1.7",
+    "ml-regression": "^4.3.0",
     "natural-brain": "^0.2.3"
   }
 }
