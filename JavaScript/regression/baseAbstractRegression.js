@@ -1,7 +1,7 @@
-export default class BaseRegression {
+export default class BaseAbstractRegression {
     constructor() {
-        if (new.target === BaseRegression) {
-            throw new Error('BaseRegression must be subclassed');
+        if (new.target === BaseAbstractRegression) {
+            throw new Error('BaseAbstractRegression must be subclassed');
         }
     }
 
